@@ -76,7 +76,8 @@
     ],
     "ignore": [
       "radar-spec.js",
-      "ref-table-spec.js"
+      "ref-table-spec.js",
+      "docs"
     ]
   }
 }
