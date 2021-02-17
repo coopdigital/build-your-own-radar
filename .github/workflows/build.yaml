@@ -20,6 +20,11 @@ jobs:
         node-version: '10.15.3'
     - name: pre build
       run: npm ci
+    - name: get the current state of the site
+      uses: actions/checkout@master
+      with:
+        repository: coopdigital/build-your-own-radar
+        token: ${{ secrets.repo_access }}
     - name: build site
       run: npm run test && npm run build
     - name: deploy
