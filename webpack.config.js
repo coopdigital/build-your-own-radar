@@ -74,7 +74,11 @@ module.exports = {
     path: buildPath,
     filename: '[name].[hash].js',
   },
-
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: [{ loader: 'babel-loader' }] },
