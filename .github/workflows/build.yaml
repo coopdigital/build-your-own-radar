@@ -2,9 +2,9 @@ name: Build site
 
 on:
   push:
-    branches: [ build_to_ghpages_branch ]
+    branches: [ master ]
   pull_request:
-    branches: [ build_to_ghpages_branch ]
+    branches: [ master ]
 
 jobs:
   build:
