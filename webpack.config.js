@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProd = args.prod
 const isDev = args.dev
@@ -28,6 +29,7 @@ if (isDev) {
 }
 
 const plugins = [
+  new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({ filename: '[name].[hash].css' }),
   new HtmlWebpackPlugin({
     template: './src/index.html',
