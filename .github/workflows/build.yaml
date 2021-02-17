@@ -27,7 +27,7 @@ jobs:
         token: ${{ secrets.repo_access }}
         path: _site
     - name: build site
-      run: npm run test && npm run end_to_end_test && npm run build
+      run: npm run test && npm run build
     - name: deploy
       run: |
         git add -A && \
