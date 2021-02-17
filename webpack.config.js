@@ -32,7 +32,9 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: './src/index.html',
     chunks: ['main'],
-    inject: 'body'
+    inject: 'body',
+    // github pages url includes a path e.g. https://foo/repo-name this makes that work
+    base: args.mode === 'production' ? 'https://coopdigital.github.io/build-your-own-radar/' : '/',
   }),
   new HtmlWebpackPlugin({
     template: './src/error.html',
@@ -68,8 +70,7 @@ module.exports = {
 
   output: {
     path: buildPath,
-    publicPath: '/',
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
   },
 
   module: {
@@ -78,20 +79,30 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, {
-          loader: 'css-loader',
-          options: { importLoaders: 1 }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            plugins: () => [
-              postcssPresetEnv({ browsers: 'last 2 versions' }),
-              cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })
-            ]
+        use: [
+          'style-loader', 
+          MiniCssExtractPlugin.loader, 
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                postcssPresetEnv({ browsers: 'last 2 versions' }),
+                cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })
+              ]
+            }
+          }, 
+          { 
+            loader: 'sass-loader', 
+            options: {
+              prependData: '$publicpath : "' + (args.mode === 'production' ? '/build-your-own-radar/' : '/') + '";'
+            }
           }
-        }, 'sass-loader']
+        ]
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
