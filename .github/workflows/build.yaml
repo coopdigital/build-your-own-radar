@@ -25,7 +25,7 @@ jobs:
     - name: deploy
       run: |
         git fetch origin gh-pages && \
-        git add -A -f && \
+        git add docs/ -A -f && \
         git config --global user.name "Github Actions CI" && \
         git config --global user.email automagic@actions.com && \
         git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
