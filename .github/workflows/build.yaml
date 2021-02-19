@@ -18,19 +18,6 @@ jobs:
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '10.15.3'
-    - name: Get branch name (merge)
-      if: github.event_name != 'pull_request'
-      shell: bash
-      run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
-
-    - name: Get branch name (pull request)
-      if: github.event_name == 'pull_request'
-      shell: bash
-      run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
-
-    - name: Debug
-      run: echo ${{ env.BRANCH_NAME }}
-
     - name: pre build
       run: npm ci
     - name: build site
@@ -42,5 +29,5 @@ jobs:
         git config --global user.name "Github Actions CI" && \
         git config --global user.email automagic@actions.com && \
         git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
-        git push https://${{ secrets.repo_access }}@github.com/coopdigital/build-your-own-radar.git ${{ env.BRANCH_NAME }}:gh-pages
+        git push https://${{ secrets.repo_access }}@github.com/coopdigital/build-your-own-radar.git master:gh-pages
 
