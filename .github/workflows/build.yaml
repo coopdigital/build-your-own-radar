@@ -37,6 +37,7 @@ jobs:
       run: npm run test && npm run build
     - name: deploy
       run: |
+        git fetch origin/gh-pages && \
         git add -A && \
         git config --global user.name "Github Actions CI" && \
         git config --global user.email automagic@actions.com && \
