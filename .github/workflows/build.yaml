@@ -24,10 +24,10 @@ jobs:
       run: npm run test && npm run build
     - name: deploy
       run: |
-        git fetch origin gh-pages && \
+        git pull origin gh-pages && \
         git add -A && \
         git config --global user.name "Github Actions CI" && \
         git config --global user.email automagic@actions.com && \
         git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
-        git push https://${{ secrets.repo_access }}@github.com/coopdigital/build-your-own-radar.git master:gh-pages
+        git push https://${{ secrets.repo_access }}@github.com/coopdigital/build-your-own-radar.git master:gh-pages --force-with-lease
 
